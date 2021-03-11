@@ -1,0 +1,35 @@
+﻿<Project Sdk="Godot.NET.Sdk/3.2.3">
+  <PropertyGroup>
+    <ProjectGuid>{7595DF5B-85CA-4D9B-8829-3742FE91B438}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MaquinaDeEstados</RootNamespace>
+    <AssemblyName>MaquinaDeEstados</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <!--The following properties were overriden during migration to prevent errors.
+    Enabling them may require other manual changes to the project and its files.-->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BT\Node.cs" />
+    <Compile Include="FSM\FiniteStateMachine.cs" />
+    <Compile Include="FSM\Fsm.cs" />
+    <Compile Include="InputActions.cs" />
+    <Compile Include="InputHandler\AIInputHandler.cs" />
+    <Compile Include="InputHandler\IAIInputHandler.cs" />
+    <Compile Include="InputHandler\IInputHandler.cs" />
+    <Compile Include="InputHandler\InputHandler.cs" />
+    <Compile Include="Levels\Left.cs" />
+    <Compile Include="Levels\Right.cs" />
+    <Compile Include="Malo.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerState.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Weapon\IWeapon.cs" />
+    <Compile Include="Weapon\Weapon.cs" />
+  </ItemGroup>
+</Project>
