@@ -39,6 +39,7 @@ collision_layer = 0
 GravityVector = Vector2( 0, 30 )
 HorizontalSpeed = 300.0
 JumpForce = 600.0
+WallJumpHorizontalForce = 100.0
 WallTime = 0.2
 
 [node name="Area2D" type="Area2D" parent="Player"]

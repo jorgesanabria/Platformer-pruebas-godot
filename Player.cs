@@ -19,6 +19,8 @@ public class Player : KinematicBody2D
 	public float JumpForce = 100f;
 	[Export]
 	public float WallJumpHorizontalForce = 50f;
+	[Export]
+	public float JumpFromWallHorizontalForce = 300f;
 	private float _wallTime = 0f;
 	[Export]
 	public float WallTime = 0.5f;
@@ -78,15 +80,17 @@ public class Player : KinematicBody2D
 		{
 			if (_wallTime > 0) return current;
 			var horizontal = Vector2.Zero;
-			if (_input.IsActionPressed(InputActions.MoveLeft))
+			if (_input.IsActionPressed(InputActions.MoveLeft) && !_input.IsActionPressed(InputActions.MoveRight))
 			{
 				horizontal = new Vector2((-1 * HorizontalSpeed), GlobalVelocity.y);
 				GlobalVelocity = horizontal;
+				return current;
 			}
-			if (_input.IsActionPressed(InputActions.MoveRight))
+			if (_input.IsActionPressed(InputActions.MoveRight) && !_input.IsActionPressed(InputActions.MoveLeft))
 			{
 				horizontal = new Vector2((HorizontalSpeed), GlobalVelocity.y);
 				GlobalVelocity = horizontal;
+				return current;
 			}
 			return current;
 		});
@@ -119,6 +123,36 @@ public class Player : KinematicBody2D
 				return PlayerState.OnAir;
 			}
 			if (!_input.IsActionPressed(InputActions.MoveLeft) && !_input.IsActionPressed(InputActions.Jump) || !GetNode<Left>("Left").LeftCast())
+			{
+				return PlayerState.OnAir;
+			}
+			return current;
+		});
+		_fsm.Add(PlayerState.OnLeftWall, (current, player) =>
+		{
+			if (_input.IsActionJustPressed(InputActions.MoveRight))
+			{
+				var jump = new Vector2(JumpFromWallHorizontalForce, -JumpForce);
+				GlobalVelocity = jump;
+				_wallTime = 0;
+				return PlayerState.OnAir;
+			}
+			if (!_input.IsActionPressed(InputActions.MoveLeft) && !_input.IsActionPressed(InputActions.Jump) || !GetNode<Left>("Left").LeftCast())
+			{
+				return PlayerState.OnAir;
+			}
+			return current;
+		});
+		_fsm.Add(PlayerState.OnRightWall, (current, player) =>
+		{
+			if (_input.IsActionJustPressed(InputActions.MoveLeft))
+			{
+				var jump = new Vector2(JumpFromWallHorizontalForce * -1f, -JumpForce);
+				GlobalVelocity = jump;
+				_wallTime = 0;
+				return PlayerState.OnAir;
+			}
+			if (!_input.IsActionPressed(InputActions.MoveRight) && !_input.IsActionPressed(InputActions.Jump) || !GetNode<Right>("Right").RightCast())
 			{
 				return PlayerState.OnAir;
 			}
