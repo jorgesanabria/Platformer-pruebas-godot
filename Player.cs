@@ -70,16 +70,34 @@ public class Player : KinematicBody2D
 			}
 			return current;
 		});
+		/*_fsm.Add(PlayerState.OnGround, (current, player) =>
+		{
+			if (_input.IsActionJustPressed(InputActions.MoveLeft) && Scale.x == 1)
+			{
+				Scale = new Vector2(Scale.x * -1, Scale.y);
+			}
+			if (_input.IsActionJustPressed(InputActions.MoveRight) && Scale.x == 1)
+			{
+				Scale = new Vector2(Scale.x * -1, Scale.y);
+			}
+			return current;
+		});*/
 		_fsm.Add(PlayerState.OnGround, (current, player) =>
 		{
 			var horizontal = Vector2.Zero;
 			if (_input.IsActionPressed(InputActions.MoveLeft))
 			{
 				horizontal = new Vector2((-1 * HorizontalSpeed), GlobalVelocity.y);
+				var pos = GetNode<Area2D>("Arma").Position;
+				if (pos.x > 0)
+					GetNode<Area2D>("Arma").Position = new Vector2(-pos.x, pos.y);
 			}
 			if (_input.IsActionPressed(InputActions.MoveRight))
 			{
 				horizontal = new Vector2((HorizontalSpeed), GlobalVelocity.y);
+				var pos = GetNode<Area2D>("Arma").Position;
+				if (pos.x < 0)
+					GetNode<Area2D>("Arma").Position = new Vector2(-pos.x, pos.y);
 			}
 			GlobalVelocity = horizontal;
 			return current;
@@ -216,6 +234,18 @@ public class Player : KinematicBody2D
 		_wallTime = Mathf.Clamp(_wallTime - delta, 0, 10);
 		_dashTime = Mathf.Clamp(_dashTime - delta, 0, 10);
 
+		if (_input.IsActionPressed(InputActions.MoveLeft))
+		{
+			var pos = GetNode<Area2D>("Arma").Position;
+			if (pos.x > 0)
+				GetNode<Area2D>("Arma").Position = new Vector2(-pos.x, pos.y);
+		}
+		if (_input.IsActionPressed(InputActions.MoveRight))
+		{
+			var pos = GetNode<Area2D>("Arma").Position;
+			if (pos.x < 0)
+				GetNode<Area2D>("Arma").Position = new Vector2(-pos.x, pos.y);
+		}
 
 		if (Input.IsActionPressed("attack") && !_atacando)
 		{
