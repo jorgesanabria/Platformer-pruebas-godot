@@ -1,7 +1,7 @@
-﻿namespace MaquinaDeEstados.Weapon
+namespace MaquinaDeEstados.Weapon
 {
-    public interface IWeapon
-    {
-        void Attack();
-    }
+	public interface IWeapon
+	{
+		void Attack();
+	}
 }

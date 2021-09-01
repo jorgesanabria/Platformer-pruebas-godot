@@ -5,6 +5,7 @@
         MoveLeft,
         MoveRight,
         Jump,
-        Attack
+        Attack,
+        Dash
     }
 }

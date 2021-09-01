@@ -24,6 +24,13 @@ public class Player : KinematicBody2D
 	private float _wallTime = 0f;
 	[Export]
 	public float WallTime = 0.5f;
+	private float _dashTime = 0f;
+	[Export]
+	public float DashTime = 0.5f;
+	[Export]
+	public float DashFactor = 2;
+	private bool _dashed = false;
+	public bool _atacando = false;
 	protected FiniteStateMachine<PlayerState, Player> _fsm;
 	protected InputHandler<InputActions, string> _input;
 	[Export]
@@ -36,7 +43,8 @@ public class Player : KinematicBody2D
 				{ InputActions.MoveLeft, "ui_left" },
 				{ InputActions.MoveRight, "ui_right" },
 				{ InputActions.Jump, "ui_up" },
-				{ InputActions.Attack, "ui_accept" }
+				{ InputActions.Attack, "ui_accept" },
+				{ InputActions.Dash, "dash" }
 			},
 			actionJustPressed: Input.IsActionJustPressed,
 			actionPressed: Input.IsActionPressed,
@@ -173,6 +181,20 @@ public class Player : KinematicBody2D
 			}
 			return current;
 		});
+		_fsm.Add(PlayerState.OnGround, (current, player) =>
+		{
+			if (_input.IsActionPressed(InputActions.Dash) && _dashTime == 0 && !_dashed || _dashTime > 0)
+			{
+				_dashed = true;	
+				var dash = new Vector2(GlobalVelocity.x * DashFactor, GlobalVelocity.y);
+				if (_dashTime == 0) _dashTime = 0.25f;
+				GlobalVelocity = dash;
+			}
+			if (!_input.IsActionPressed(InputActions.Dash)) {
+				_dashed = false;
+			}
+			return current;
+		});
 		_fsm.Add(PlayerState.OnGround, (current, player) => !IsOnFloor() && !IsOnWall()? PlayerState.OnAir : current);
 	}
 
@@ -192,5 +214,21 @@ public class Player : KinematicBody2D
 	{
 		_fsm.Tick(this);
 		_wallTime = Mathf.Clamp(_wallTime - delta, 0, 10);
+		_dashTime = Mathf.Clamp(_dashTime - delta, 0, 10);
+
+
+		if (Input.IsActionPressed("attack") && !_atacando)
+		{
+			_atacando = true;
+			var result = GetNode<Area2D>("Arma").GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			foreach (var body in result)
+			{
+				var enemy = body as Malo;
+				enemy?.Damage();
+			}
+		}
+
+		if (!Input.IsActionPressed("attack")) _atacando = false;
 	}
 }
