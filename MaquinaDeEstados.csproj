@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BT\Node.cs" />
+    <Compile Include="Covertura.cs" />
     <Compile Include="FSM\FiniteStateMachine.cs" />
     <Compile Include="FSM\Fsm.cs" />
     <Compile Include="InputActions.cs" />

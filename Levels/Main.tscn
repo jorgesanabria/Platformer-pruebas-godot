@@ -60,3 +60,6 @@ margin_top = -77.0
 margin_right = 54.0
 margin_bottom = -37.0
 text = "Vida 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}

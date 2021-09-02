@@ -28,6 +28,7 @@ public class Malo : KinematicBody2D, IDamagable
 	protected FiniteStateMachine<PlayerState, Malo> _fsm;
 	protected AIInputHandler<InputActions> _input;
 	protected Root<Malo> _bt;
+	float _velocidadNormal = 0f;
 	public override void _Ready()
 	{
 		_textLabel = GetNode(TextPath) as RichTextLabel;
@@ -54,6 +55,20 @@ public class Malo : KinematicBody2D, IDamagable
 		});
 		_fsm.Add(PlayerState.OnGround, (current, player) =>
 		{
+			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			foreach (var body in bodies)
+			{
+				if (body is Player jugador && !jugador.Cubierto)
+				{
+					HorizontalSpeed = _velocidadNormal * 10;
+					break;
+				}
+				else
+				{
+					HorizontalSpeed = _velocidadNormal;
+				}
+			}
 			var horizontal = Vector2.Zero;
 			if (_input.IsActionPressed(InputActions.MoveLeft))
 			{
@@ -173,6 +188,8 @@ public class Malo : KinematicBody2D, IDamagable
 			}),
 			_bt.Wait(5f)
 		);
+
+		_velocidadNormal = HorizontalSpeed;
 	}
 
 	private Vector2 _getCollisionNormal()
@@ -188,6 +205,26 @@ public class Malo : KinematicBody2D, IDamagable
 		GlobalVelocity = MoveAndSlide(GlobalVelocity, FloorNormal);
 		_wallTime = Mathf.Clamp(_wallTime - delta, 0, 10);
 		_bt.Tick(this);
+
+		if (_input.IsActionPressed(InputActions.MoveLeft))
+		{
+			var angle = GetNode<CollisionShape2D>("Area2D/Detector").Transform.Rotation;
+			if (angle < 0) {
+				var trasnform = GetNode<CollisionShape2D>("Area2D/Detector").Transform;
+				trasnform.Rotation = -angle;
+				GetNode<CollisionShape2D>("Area2D/Detector").Transform = trasnform;
+			}
+		}
+		if (_input.IsActionPressed(InputActions.MoveRight))
+		{
+			var angle = GetNode<CollisionShape2D>("Area2D/Detector").Transform.Rotation;
+			if (angle > 0) {
+				var trasnform = GetNode<CollisionShape2D>("Area2D/Detector").Transform;
+				trasnform.Rotation = -angle;
+				GetNode<CollisionShape2D>("Area2D/Detector").Transform = trasnform;
+			}
+		}
+
 	}
 	int _life = 100;
 	public void Damage()
