@@ -73,6 +73,9 @@ public class Player : KinematicBody2D
 		});
 		_fsm.Add(PlayerState.OnGround, (current, player) =>
 		{
+			if (_input.IsActionPressed(InputActions.Dash))
+				return current;
+
 			var horizontal = Vector2.Zero;
 			if (_input.IsActionPressed(InputActions.MoveLeft))
 			{

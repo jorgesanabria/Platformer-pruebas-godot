@@ -72,9 +72,12 @@ HorizontalSpeed = 300.0
 JumpForce = 600.0
 WallJumpHorizontalForce = 600.0
 WallTime = 0.1
+DashFactor = 3.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+smoothing_enabled = true
+smoothing_speed = 2.0
 
 [node name="Malo" parent="." instance=ExtResource( 2 )]
 collision_layer = 0

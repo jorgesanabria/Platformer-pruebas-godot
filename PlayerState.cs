@@ -1,7 +1,14 @@
-﻿public enum PlayerState
+public enum PlayerState
 {
-    OnAir,
-    OnLeftWall,
-    OnRightWall,
-    OnGround
+	OnAir,
+	OnLeftWall,
+	OnRightWall,
+	OnGround
+}
+public enum EnemyState
+{
+	Quieto,
+	Atacando,
+	MoviendoDerecha,
+	MoviendoIzquierda
 }

@@ -6,7 +6,7 @@
 extents = Vector2( 25.0584, 29.6102 )
 
 [sub_resource type="RayShape2D" id=2]
-length = 209.252
+length = 237.78
 
 [node name="Malo" type="KinematicBody2D"]
 script = ExtResource( 1 )

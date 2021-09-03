@@ -28,12 +28,14 @@ public class Malo : KinematicBody2D, IDamagable
 	protected FiniteStateMachine<PlayerState, Malo> _fsm;
 	protected AIInputHandler<InputActions> _input;
 	protected Root<Malo> _bt;
+	protected FiniteStateMachine<EnemyState, Malo> _enemyState;
 	float _velocidadNormal = 0f;
 	public override void _Ready()
 	{
 		_textLabel = GetNode(TextPath) as RichTextLabel;
 		_input = new AIInputHandler<InputActions>();
 		_fsm = new FiniteStateMachine<PlayerState, Malo>(equalizer: (current, captured) => current == captured) { InitialState = PlayerState.OnAir };
+		_enemyState = new FiniteStateMachine<EnemyState, Malo>(equalizer: (current, captured) => current == captured) { InitialState = EnemyState.MoviendoDerecha };
 		_fsm.Add(PlayerState.OnAir, (current, player) =>
 		{
 			if (!IsOnFloor() && !IsOnWall())
@@ -55,20 +57,6 @@ public class Malo : KinematicBody2D, IDamagable
 		});
 		_fsm.Add(PlayerState.OnGround, (current, player) =>
 		{
-			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
-
-			foreach (var body in bodies)
-			{
-				if (body is Player jugador && !jugador.Cubierto)
-				{
-					HorizontalSpeed = _velocidadNormal * 10;
-					break;
-				}
-				else
-				{
-					HorizontalSpeed = _velocidadNormal;
-				}
-			}
 			var horizontal = Vector2.Zero;
 			if (_input.IsActionPressed(InputActions.MoveLeft))
 			{
@@ -160,7 +148,7 @@ public class Malo : KinematicBody2D, IDamagable
 			}
 			return current;
 		});
-		_bt = Bt.Root(
+		/*_bt = Bt.Root(
 			_bt.Function(x => {
 				if (!x.IsOnWall() || x.IsOnWall() && x._getCollisionNormal() == Vector2.Left)
 				{
@@ -187,7 +175,101 @@ public class Malo : KinematicBody2D, IDamagable
 				}
 			}),
 			_bt.Wait(5f)
-		);
+		);*/
+
+		_enemyState.Add(EnemyState.MoviendoDerecha, (current, enemy) =>
+		{
+			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			Player jugador = null;
+
+			foreach (var body in bodies)
+			{
+				jugador = body as Player;
+				if (body is Player && !jugador.Cubierto)
+				{
+					HorizontalSpeed = _velocidadNormal * 4;
+					break;
+				}
+				else
+				{
+					HorizontalSpeed = _velocidadNormal;
+				}
+			}
+
+			if (jugador != null && Mathf.Abs(Position.x - jugador.Position.x) <= 50)
+			{
+				_input.SetActionReleased(InputActions.MoveRight);
+				return EnemyState.Atacando;
+			}
+
+			if (IsOnWall())
+			{
+				_input.SetActionPressed(InputActions.MoveLeft);
+				_input.SetActionReleased(InputActions.MoveRight);
+				return EnemyState.MoviendoIzquierda;
+			}
+			_input.SetActionPressed(InputActions.MoveRight);
+			return current;
+		});
+		
+		_enemyState.Add(EnemyState.MoviendoIzquierda, (current, enemy) =>
+		{
+			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			Player jugador = null;
+
+			foreach (var body in bodies)
+			{
+				jugador = body as Player;
+				if (body is Player && !jugador.Cubierto)
+				{
+					HorizontalSpeed = _velocidadNormal * 4;
+					break;
+				}
+				else
+				{
+					HorizontalSpeed = _velocidadNormal;
+				}
+			}
+
+			if (jugador != null && Mathf.Abs(Position.x - jugador.Position.x) <= 50)
+			{
+				_input.SetActionReleased(InputActions.MoveLeft);
+				return EnemyState.Atacando;
+			}
+
+			if (IsOnWall())
+			{
+				_input.SetActionPressed(InputActions.MoveRight);
+				_input.SetActionReleased(InputActions.MoveLeft);
+				return EnemyState.MoviendoDerecha;
+			}
+			_input.SetActionPressed(InputActions.MoveLeft);
+			return current;
+		});
+
+		_enemyState.Add(EnemyState.Atacando, (current, enemy) =>
+		{
+			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			Player jugador = null;
+
+			foreach (var body in bodies)
+			{
+				jugador = body as Player;
+				if (body is Player && !jugador.Cubierto)
+				{
+					if (Mathf.Abs(Transform.x.x - jugador.Transform.x.x) > 100)
+					{
+						return EnemyState.MoviendoIzquierda;
+					}
+				}
+			}
+			if (jugador == null) return EnemyState.MoviendoIzquierda;
+
+			return current;
+		});
 
 		_velocidadNormal = HorizontalSpeed;
 	}
@@ -204,7 +286,8 @@ public class Malo : KinematicBody2D, IDamagable
 		_fsm.Tick(this);
 		GlobalVelocity = MoveAndSlide(GlobalVelocity, FloorNormal);
 		_wallTime = Mathf.Clamp(_wallTime - delta, 0, 10);
-		_bt.Tick(this);
+		//_bt.Tick(this);
+		_enemyState.Tick(this);
 
 		if (_input.IsActionPressed(InputActions.MoveLeft))
 		{
