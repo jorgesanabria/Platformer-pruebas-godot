@@ -30,6 +30,8 @@ public class Malo : KinematicBody2D, IDamagable
 	protected Root<Malo> _bt;
 	protected FiniteStateMachine<EnemyState, Malo> _enemyState;
 	float _velocidadNormal = 0f;
+	EnemyState _estadoAnterior;
+	float _caminarHasta = 0;
 	public override void _Ready()
 	{
 		_textLabel = GetNode(TextPath) as RichTextLabel;
@@ -148,37 +150,10 @@ public class Malo : KinematicBody2D, IDamagable
 			}
 			return current;
 		});
-		/*_bt = Bt.Root(
-			_bt.Function(x => {
-				if (!x.IsOnWall() || x.IsOnWall() && x._getCollisionNormal() == Vector2.Left)
-				{
-					x._input.SetActionPressed(InputActions.MoveLeft);
-					return Node<Malo>.Status.Prossess;
-				}
-				else
-				{
-					x._input.SetActionReleased(InputActions.MoveLeft);
-					return Node<Malo>.Status.Success;
-				}
-			}),
-			_bt.Wait(5f),
-			_bt.Function(x => {
-				if (!x.IsOnWall() || x.IsOnWall() && x._getCollisionNormal() == Vector2.Right)
-				{
-					x._input.SetActionPressed(InputActions.MoveRight);
-					return Node<Malo>.Status.Prossess;
-				}
-				else
-				{
-					x._input.SetActionReleased(InputActions.MoveRight);
-					return Node<Malo>.Status.Success;
-				}
-			}),
-			_bt.Wait(5f)
-		);*/
 
 		_enemyState.Add(EnemyState.MoviendoDerecha, (current, enemy) =>
 		{
+			_estadoAnterior = current;
 			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
 
 			Player jugador = null;
@@ -189,12 +164,23 @@ public class Malo : KinematicBody2D, IDamagable
 				if (body is Player && !jugador.Cubierto)
 				{
 					HorizontalSpeed = _velocidadNormal * 4;
+					_caminarHasta = jugador.Position.x;
 					break;
 				}
 				else
 				{
 					HorizontalSpeed = _velocidadNormal;
 				}
+			}
+
+			if (_caminarHasta != 0)
+			{
+				HorizontalSpeed = _velocidadNormal * 4;
+			}
+			if (Mathf.Abs(Position.x - _caminarHasta) <= 10)
+			{
+				_caminarHasta = 0;
+				HorizontalSpeed = _velocidadNormal;
 			}
 
 			if (jugador != null && Mathf.Abs(Position.x - jugador.Position.x) <= 50)
@@ -215,6 +201,7 @@ public class Malo : KinematicBody2D, IDamagable
 		
 		_enemyState.Add(EnemyState.MoviendoIzquierda, (current, enemy) =>
 		{
+			_estadoAnterior = current;
 			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
 
 			Player jugador = null;
@@ -225,12 +212,23 @@ public class Malo : KinematicBody2D, IDamagable
 				if (body is Player && !jugador.Cubierto)
 				{
 					HorizontalSpeed = _velocidadNormal * 4;
+					_caminarHasta = jugador.Position.x;
 					break;
 				}
 				else
 				{
 					HorizontalSpeed = _velocidadNormal;
 				}
+			}
+
+			if (_caminarHasta != 0)
+			{
+				HorizontalSpeed = _velocidadNormal * 4;
+			}
+			if (Mathf.Abs(Position.x - _caminarHasta) <= 10)
+			{
+				_caminarHasta = 0;
+				HorizontalSpeed = _velocidadNormal;
 			}
 
 			if (jugador != null && Mathf.Abs(Position.x - jugador.Position.x) <= 50)
@@ -260,13 +258,13 @@ public class Malo : KinematicBody2D, IDamagable
 				jugador = body as Player;
 				if (body is Player && !jugador.Cubierto)
 				{
-					if (Mathf.Abs(Transform.x.x - jugador.Transform.x.x) > 100)
+					if (Mathf.Abs(Position.x - jugador.Position.x) > 100)
 					{
-						return EnemyState.MoviendoIzquierda;
+						return _estadoAnterior;
 					}
 				}
 			}
-			if (jugador == null) return EnemyState.MoviendoIzquierda;
+			if (jugador == null) return _estadoAnterior;
 
 			return current;
 		});
@@ -297,6 +295,12 @@ public class Malo : KinematicBody2D, IDamagable
 				trasnform.Rotation = -angle;
 				GetNode<CollisionShape2D>("Area2D/Detector").Transform = trasnform;
 			}
+			var angle2 = GetNode<CollisionShape2D>("Area2D2/Detector2").Transform.Rotation;
+			if (angle2 > 0) {
+				var trasnform = GetNode<CollisionShape2D>("Area2D2/Detector2").Transform;
+				trasnform.Rotation = -angle2;
+				GetNode<CollisionShape2D>("Area2D2/Detector2").Transform = trasnform;
+			}
 		}
 		if (_input.IsActionPressed(InputActions.MoveRight))
 		{
@@ -305,6 +309,12 @@ public class Malo : KinematicBody2D, IDamagable
 				var trasnform = GetNode<CollisionShape2D>("Area2D/Detector").Transform;
 				trasnform.Rotation = -angle;
 				GetNode<CollisionShape2D>("Area2D/Detector").Transform = trasnform;
+			}
+			var angle2 = GetNode<CollisionShape2D>("Area2D2/Detector2").Transform.Rotation;
+			if (angle2 < 0) {
+				var trasnform = GetNode<CollisionShape2D>("Area2D2/Detector2").Transform;
+				trasnform.Rotation = -angle2;
+				GetNode<CollisionShape2D>("Area2D2/Detector2").Transform = trasnform;
 			}
 		}
 
