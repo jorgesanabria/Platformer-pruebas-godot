@@ -82,6 +82,7 @@ smoothing_speed = 2.0
 [node name="Malo" parent="." instance=ExtResource( 2 )]
 collision_layer = 0
 TextPath = NodePath("RichTextLabel")
+MaximoPatrullaAlerta = 50.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Malo"]
 margin_left = -18.4997
