@@ -10,5 +10,7 @@ public enum EnemyState
 	Quieto,
 	Atacando,
 	MoviendoDerecha,
-	MoviendoIzquierda
+	MoviendoIzquierda,
+	AlertaIzquierda,
+	AlertaDerecha
 }

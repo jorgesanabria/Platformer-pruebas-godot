@@ -29,11 +29,18 @@ public class Malo : KinematicBody2D, IDamagable
 	protected AIInputHandler<InputActions> _input;
 	protected Root<Malo> _bt;
 	protected FiniteStateMachine<EnemyState, Malo> _enemyState;
-	float _velocidadNormal = 0f;
+	private float _velocidadNormal = 0f;
 	EnemyState _estadoAnterior;
-	float _caminarHasta = 0;
+	private float _caminarHasta = 0;
+	private float _xInicial;
+	private float _xOriginal;
+	[Export]
+	public float MaximoPatrullaAlerta = 100;
+	private float _tiempoAlerta;
 	public override void _Ready()
 	{
+		_xInicial = Position.x;
+		_xOriginal = _xInicial;
 		_textLabel = GetNode(TextPath) as RichTextLabel;
 		_input = new AIInputHandler<InputActions>();
 		_fsm = new FiniteStateMachine<PlayerState, Malo>(equalizer: (current, captured) => current == captured) { InitialState = PlayerState.OnAir };
@@ -154,24 +161,7 @@ public class Malo : KinematicBody2D, IDamagable
 		_enemyState.Add(EnemyState.MoviendoDerecha, (current, enemy) =>
 		{
 			_estadoAnterior = current;
-			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
-
-			Player jugador = null;
-
-			foreach (var body in bodies)
-			{
-				jugador = body as Player;
-				if (body is Player && !jugador.Cubierto)
-				{
-					HorizontalSpeed = _velocidadNormal * 4;
-					_caminarHasta = jugador.Position.x;
-					break;
-				}
-				else
-				{
-					HorizontalSpeed = _velocidadNormal;
-				}
-			}
+			Player jugador = DetectarYPerseguir();
 
 			if (_caminarHasta != 0)
 			{
@@ -179,8 +169,15 @@ public class Malo : KinematicBody2D, IDamagable
 			}
 			if (Mathf.Abs(Position.x - _caminarHasta) <= 10)
 			{
-				_caminarHasta = 0;
 				HorizontalSpeed = _velocidadNormal;
+
+				if (_caminarHasta != 0)
+				{
+					_caminarHasta = 0;
+					_xInicial = Position.x;
+					_tiempoAlerta = 30;
+					return EnemyState.AlertaDerecha;
+				}
 			}
 
 			if (jugador != null && Mathf.Abs(Position.x - jugador.Position.x) <= 50)
@@ -198,28 +195,11 @@ public class Malo : KinematicBody2D, IDamagable
 			_input.SetActionPressed(InputActions.MoveRight);
 			return current;
 		});
-		
+
 		_enemyState.Add(EnemyState.MoviendoIzquierda, (current, enemy) =>
 		{
 			_estadoAnterior = current;
-			var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
-
-			Player jugador = null;
-
-			foreach (var body in bodies)
-			{
-				jugador = body as Player;
-				if (body is Player && !jugador.Cubierto)
-				{
-					HorizontalSpeed = _velocidadNormal * 4;
-					_caminarHasta = jugador.Position.x;
-					break;
-				}
-				else
-				{
-					HorizontalSpeed = _velocidadNormal;
-				}
-			}
+			Player jugador = DetectarYPerseguir();
 
 			if (_caminarHasta != 0)
 			{
@@ -227,8 +207,15 @@ public class Malo : KinematicBody2D, IDamagable
 			}
 			if (Mathf.Abs(Position.x - _caminarHasta) <= 10)
 			{
-				_caminarHasta = 0;
 				HorizontalSpeed = _velocidadNormal;
+
+				if (_caminarHasta != 0)
+				{
+					_caminarHasta = 0;
+					_xInicial = Position.x;
+					_tiempoAlerta = 30;
+					return EnemyState.AlertaIzquierda;
+				}
 			}
 
 			if (jugador != null && Mathf.Abs(Position.x - jugador.Position.x) <= 50)
@@ -244,6 +231,76 @@ public class Malo : KinematicBody2D, IDamagable
 				return EnemyState.MoviendoDerecha;
 			}
 			_input.SetActionPressed(InputActions.MoveLeft);
+			return current;
+		});
+
+		_enemyState.Add(EnemyState.AlertaIzquierda, (current, enemy) =>
+		{
+			var jugador = DetectarYPerseguir();
+			if (_caminarHasta != 0)
+			{
+				_xInicial = _xOriginal;
+				return EnemyState.MoviendoIzquierda;
+			}
+			if (Mathf.Abs(_xInicial - Position.x) <= MaximoPatrullaAlerta)
+			{
+				_input.SetActionPressed(InputActions.MoveLeft);
+				_input.SetActionReleased(InputActions.MoveRight);
+			}
+			else
+			{
+				_input.SetActionPressed(InputActions.MoveRight);
+				_input.SetActionReleased(InputActions.MoveLeft);
+				return EnemyState.AlertaDerecha;
+			}
+			if (_tiempoAlerta == 0)
+			{
+				_xInicial = _xOriginal;
+				HorizontalSpeed = _velocidadNormal;
+				return EnemyState.MoviendoDerecha;
+			}
+
+			if (IsOnWall())
+			{
+				_input.SetActionPressed(InputActions.MoveRight);
+				_input.SetActionReleased(InputActions.MoveLeft);
+				return EnemyState.AlertaDerecha;
+			}
+			return current;
+		});
+
+		_enemyState.Add(EnemyState.AlertaDerecha, (current, enemy) =>
+		{
+			var jugador = DetectarYPerseguir();
+			if (_caminarHasta != 0)
+			{
+				_xInicial = _xOriginal;
+				return EnemyState.MoviendoDerecha;
+			}
+			if (Mathf.Abs(_xInicial - Position.x) <= MaximoPatrullaAlerta)
+			{
+				_input.SetActionPressed(InputActions.MoveRight);
+				_input.SetActionReleased(InputActions.MoveLeft);
+			}
+			else
+			{
+				_input.SetActionPressed(InputActions.MoveLeft);
+				_input.SetActionReleased(InputActions.MoveRight);
+				return EnemyState.AlertaIzquierda;
+			}
+			if (_tiempoAlerta == 0)
+			{
+				_xInicial = _xOriginal;
+				HorizontalSpeed = _velocidadNormal;
+				return EnemyState.MoviendoIzquierda;
+			}
+
+			if (IsOnWall())
+			{
+				_input.SetActionPressed(InputActions.MoveLeft);
+				_input.SetActionReleased(InputActions.MoveRight);
+				return EnemyState.AlertaIzquierda;
+			}
 			return current;
 		});
 
@@ -272,6 +329,30 @@ public class Malo : KinematicBody2D, IDamagable
 		_velocidadNormal = HorizontalSpeed;
 	}
 
+	private Player DetectarYPerseguir()
+	{
+		var bodies = GetNode<Area2D>("Area2D").GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+		Player jugador = null;
+
+		foreach (var body in bodies)
+		{
+			jugador = body as Player;
+			if (body is Player && !jugador.Cubierto)
+			{
+				HorizontalSpeed = _velocidadNormal * 4;
+				_caminarHasta = jugador.Position.x;
+				break;
+			}
+			else
+			{
+				HorizontalSpeed = _velocidadNormal;
+			}
+		}
+
+		return jugador;
+	}
+
 	private Vector2 _getCollisionNormal()
 	{
 		var lastIndex = GetSlideCount() - 1;
@@ -286,6 +367,14 @@ public class Malo : KinematicBody2D, IDamagable
 		_wallTime = Mathf.Clamp(_wallTime - delta, 0, 10);
 		//_bt.Tick(this);
 		_enemyState.Tick(this);
+
+		_tiempoAlerta = Mathf.Clamp(_tiempoAlerta - delta, 0, 30);
+
+		if (_tiempoAlerta != 0)
+		{
+			if (HorizontalSpeed != (_velocidadNormal * 4))
+				HorizontalSpeed = _velocidadNormal * 4;
+		}
 
 		if (_input.IsActionPressed(InputActions.MoveLeft))
 		{
