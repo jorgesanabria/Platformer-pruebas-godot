@@ -193,6 +193,21 @@ public class Malo : KinematicBody2D, IDamagable
 				return EnemyState.MoviendoIzquierda;
 			}
 			_input.SetActionPressed(InputActions.MoveRight);
+			_input.SetActionReleased(InputActions.MoveLeft);
+
+			var bodies = GetNode<Area2D>("Area2D2")?.GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			foreach (var body in bodies)
+			{
+				jugador = body as Player;
+				if (jugador != null && !jugador.Cubierto)
+				{
+					GD.Print($"{DateTime.Now.ToString("G")}");
+					//_input.SetActionPressed(InputActions.MoveRight);
+					//_input.SetActionReleased(InputActions.MoveLeft);
+					return EnemyState.MoviendoIzquierda;
+				}
+			}
 			return current;
 		});
 
@@ -231,12 +246,41 @@ public class Malo : KinematicBody2D, IDamagable
 				return EnemyState.MoviendoDerecha;
 			}
 			_input.SetActionPressed(InputActions.MoveLeft);
+			_input.SetActionReleased(InputActions.MoveRight);
+
+			var bodies = GetNode<Area2D>("Area2D2")?.GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			foreach (var body in bodies)
+			{
+				jugador = body as Player;
+				if (jugador != null && !jugador.Cubierto)
+				{
+					GD.Print($"{DateTime.Now.ToString("G")}");
+					//_input.SetActionPressed(InputActions.MoveLeft);
+					//_input.SetActionReleased(InputActions.MoveRight);
+					return EnemyState.MoviendoDerecha;
+				}
+			}
 			return current;
 		});
 
 		_enemyState.Add(EnemyState.AlertaIzquierda, (current, enemy) =>
 		{
-			var jugador = DetectarYPerseguir();
+			_ = DetectarYPerseguir();
+
+			var bodies = GetNode<Area2D>("Area2D2")?.GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			foreach (var body in bodies)
+			{
+				if (body is Player jugador && !jugador.Cubierto)
+				{
+					GD.Print($"{DateTime.Now:G}");
+					_input.SetActionPressed(InputActions.MoveRight);
+					_input.SetActionReleased(InputActions.MoveLeft);
+					return EnemyState.AlertaDerecha;
+				}
+			}
+
 			if (_caminarHasta != 0)
 			{
 				_xInicial = _xOriginal;
@@ -266,12 +310,27 @@ public class Malo : KinematicBody2D, IDamagable
 				_input.SetActionReleased(InputActions.MoveLeft);
 				return EnemyState.AlertaDerecha;
 			}
+
 			return current;
 		});
 
 		_enemyState.Add(EnemyState.AlertaDerecha, (current, enemy) =>
 		{
-			var jugador = DetectarYPerseguir();
+			_ = DetectarYPerseguir();
+
+			var bodies = GetNode<Area2D>("Area2D2")?.GetOverlappingBodies() ?? new Godot.Collections.Array();
+
+			foreach (var body in bodies)
+			{
+				if (body is Player jugador && !jugador.Cubierto)
+				{
+					GD.Print($"{DateTime.Now:G}");
+					_input.SetActionPressed(InputActions.MoveLeft);
+					_input.SetActionReleased(InputActions.MoveRight);
+					return EnemyState.AlertaIzquierda;
+				}
+			}
+
 			if (_caminarHasta != 0)
 			{
 				_xInicial = _xOriginal;
@@ -301,6 +360,7 @@ public class Malo : KinematicBody2D, IDamagable
 				_input.SetActionReleased(InputActions.MoveRight);
 				return EnemyState.AlertaIzquierda;
 			}
+
 			return current;
 		});
 
