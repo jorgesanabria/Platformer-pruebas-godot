@@ -1,12 +1,9 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-public class EnemigoDePrueba : Actor<EnemigoDePruebaEstados>
+public class EnemigoDePrueba : Actor
 {
-    protected override bool CompareState(EnemigoDePruebaEstados toCompare)
-    {
-        return toCompare == CurrentState;
-    }
 }
 public enum EnemigoDePruebaEstados
 {

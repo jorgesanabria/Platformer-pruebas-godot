@@ -1,9 +1,8 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Actor<TState> : KinematicBody2D
+public class Actor : KinematicBody2D
 {
 	[Export]
 	public NodePath StateHandlersPath { get; set; }
@@ -14,51 +13,50 @@ public class Actor<TState> : KinematicBody2D
 	[Export]
 	public Vector2 FloorNormal = new Vector2(0f, -1f);
 	[Export]
-	public TState CurrentState;
+	public string CurrentState;
 
-	private List<IStateHandler<Actor<TState>>> _StateHandlers { get; set; } = new List<IStateHandler<Actor<TState>>>();
+	protected virtual List<IStateHandler> _StateHandlers { get; set; } = new List<IStateHandler>();
 	private Vector2 _MoveDirection = Vector2.Zero;
 	private Vector2 _Velocity = Vector2.Zero;
 
-	protected void MoveTo(WayPoint point)
+	public void MoveTo(WayPoint point)
 	{
-		_MoveDirection = (Position - point.Position).Normalized();
+		var normal = (point.Position - Position).Normalized() * MovementVelocity;
+		_Velocity = new Vector2(normal.x, _Velocity.y);
 	}
 
 	public override void _Ready()
 	{
-		var handlers = GetNode(StateHandlersPath)?.GetChildren() ?? new Godot.Collections.Array();
-		foreach (var handler in handlers) _StateHandlers.Add((IStateHandler<Actor<TState>>)handler);
+		foreach (var handler in GetNode(StateHandlersPath)?.GetChildren() ?? new Godot.Collections.Array())
+		{
+			if (handler is IStateHandler validStateHandler) _StateHandlers.Add(validStateHandler);
+		}
 	}
+
 	public override void _PhysicsProcess(float delta)
 	{
 		if (!IsOnFloor())
 		{
 			_Velocity += GravityVector;
 		}
-		_Velocity = MoveAndSlide(_Velocity * _MoveDirection * MovementVelocity, FloorNormal);
+		_Velocity = MoveAndSlide(_Velocity, FloorNormal);
 
-		var toHandle = _StateHandlers.Where(x => CompareState(x.StateToHandle));
+		var toHandle = _StateHandlers.Where(x => x.StateToHandle == CurrentState);
 
 		foreach (var handler in toHandle)
-        {
+		{
 			var result = handler.HandleState(this);
-			if (!CompareState(result))
-            {
+			if (result != CurrentState)
+			{
 				CurrentState = result;
 				break;
-            }
+			}
 		}
 	}
+}
 
-	protected virtual bool CompareState(TState toCompare)
-    {
-		return true;
-    }
-
-	public interface IStateHandler<TActor> where TActor : Actor<TState>
-	{
-		TState StateToHandle { get; }
-		TState HandleState(TActor actor);
-	}
+public interface IStateHandler
+{
+	string StateToHandle { get; }
+	string HandleState(Actor actor);
 }
