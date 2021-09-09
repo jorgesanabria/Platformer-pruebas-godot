@@ -3,7 +3,7 @@
 [ext_resource path="res://DetectorRadial.cs" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 159.186
+radius = 507.331
 
 [node name="DetectorRadial" type="Area2D"]
 script = ExtResource( 1 )
