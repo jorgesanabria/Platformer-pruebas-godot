@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Levels/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://malo.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://EnemigoDePrueba.tscn" type="PackedScene" id=4]
 [ext_resource path="res://WayPoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Mover.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Perseguir.tscn" type="PackedScene" id=7]
+[ext_resource path="res://DetectorRadial.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1570.51, 10 )
@@ -26,6 +28,9 @@ __meta__ = {
 
 [node name="Covertura" parent="." instance=ExtResource( 3 )]
 position = Vector2( 40.3629, 512.946 )
+
+[node name="Covertura2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1597.7, 512.946 )
 
 [node name="Platforms" type="Node2D" parent="."]
 position = Vector2( 502.617, 327.603 )
@@ -76,7 +81,8 @@ HorizontalSpeed = 300.0
 JumpForce = 600.0
 WallJumpHorizontalForce = 600.0
 WallTime = 0.1
-DashFactor = 3.0
+DashTime = 0.05
+DashFactor = 15.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -97,7 +103,8 @@ __meta__ = {
 }
 
 [node name="EnemigoDePrueba" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1616.2, 475.947 )
+position = Vector2( 1185.66, 447.357 )
+collision_layer = 0
 StateHandlersPath = NodePath("State_handlers")
 MovementVelocity = 150.0
 CurrentState = "Mover"
@@ -105,6 +112,12 @@ CurrentState = "Mover"
 [node name="State_handlers" type="Node" parent="EnemigoDePrueba"]
 
 [node name="Mover" parent="EnemigoDePrueba/State_handlers" instance=ExtResource( 6 )]
+PathToDetector = NodePath("../../DetectorRadial")
+
+[node name="Perseguir" parent="EnemigoDePrueba/State_handlers" instance=ExtResource( 7 )]
+PathToDetector = NodePath("../../DetectorRadial")
+
+[node name="DetectorRadial" parent="EnemigoDePrueba" instance=ExtResource( 8 )]
 
 [node name="WayPoints" type="Node" parent="."]
 

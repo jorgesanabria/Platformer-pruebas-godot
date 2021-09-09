@@ -5,6 +5,9 @@ using System.Linq;
 public class Mover : Node, IStateHandler
 {
 	[Export]
+	public NodePath PathToDetector { get; set; }
+	private DetectorRadial _detector;
+	[Export]
 	public NodePath WayPointsPath;
 	private List<WayPoint> _WayPoints = new List<WayPoint>();
 	private WayPoint _CurrentWayPoint;
@@ -12,13 +15,16 @@ public class Mover : Node, IStateHandler
 
 	public string HandleState(Actor actor)
 	{
-		if (_CurrentWayPoint != null && _CurrentWayPoint.DistanceTo(actor) <= 15)
+		var (detectado, _) = _detector.DetectPlayer();
+		if (detectado)
 		{
-			GD.Print("distancia alcanzada");
-			_CurrentWayPoint = _CurrentWayPoint.NextWayPoint(_WayPoints);
+			return nameof(Perseguir);
 		}
 
-		GD.Print(_CurrentWayPoint.Name);
+		if (_CurrentWayPoint != null && _CurrentWayPoint.DistanceTo(actor) <= 15)
+		{
+			_CurrentWayPoint = _CurrentWayPoint.NextWayPoint(_WayPoints);
+		}
 
 		actor.MoveTo(_CurrentWayPoint);
 
@@ -30,5 +36,6 @@ public class Mover : Node, IStateHandler
 		foreach (var wayPint in GetNode(WayPointsPath).GetChildren()) _WayPoints.Add((WayPoint)wayPint);
 
 		_CurrentWayPoint = _WayPoints.First();
+		_detector = GetNode<DetectorRadial>(PathToDetector);
 	}
 }

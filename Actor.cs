@@ -24,6 +24,11 @@ public class Actor : KinematicBody2D
 		var normal = (point.Position - Position).Normalized() * MovementVelocity;
 		_Velocity = new Vector2(normal.x, _Velocity.y);
 	}
+	public void MoveTo(Vector2 point)
+	{
+		var normal = (point- Position).Normalized() * MovementVelocity;
+		_Velocity = new Vector2(normal.x, _Velocity.y);
+	}
 
 	public override void _Ready()
 	{

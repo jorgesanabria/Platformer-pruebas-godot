@@ -29,7 +29,7 @@ public class Player : KinematicBody2D
 	[Export]
 	public float DashTime = 0.5f;
 	[Export]
-	public float DashFactor = 2;
+	public float DashFactor = 4;
 	private bool _dashed = false;
 	public bool _atacando = false;
 	protected FiniteStateMachine<PlayerState, Player> _fsm;

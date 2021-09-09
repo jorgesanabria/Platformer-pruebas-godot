@@ -18,6 +18,7 @@
     <Compile Include="Actor.cs" />
     <Compile Include="BT\Node.cs" />
     <Compile Include="Covertura.cs" />
+    <Compile Include="DetectorRadial.cs" />
     <Compile Include="EnemigoDePrueba.cs" />
     <Compile Include="FSM\FiniteStateMachine.cs" />
     <Compile Include="FSM\Fsm.cs" />
@@ -30,6 +31,7 @@
     <Compile Include="Levels\Right.cs" />
     <Compile Include="Malo.cs" />
     <Compile Include="Mover.cs" />
+    <Compile Include="Perseguir.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
