@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Actor : KinematicBody2D
+public class Actor : KinematicBody2D, IEnablable
 {
 	[Export]
 	public NodePath StateHandlersPath { get; set; }
@@ -18,7 +18,6 @@ public class Actor : KinematicBody2D
 	protected virtual List<IStateHandler> _StateHandlers { get; set; } = new List<IStateHandler>();
 	private Vector2 _MoveDirection = Vector2.Zero;
 	private Vector2 _Velocity = Vector2.Zero;
-
 	public void MoveTo(WayPoint point)
 	{
 		var normal = (point.Position - Position).Normalized() * MovementVelocity;
@@ -36,6 +35,8 @@ public class Actor : KinematicBody2D
 		{
 			if (handler is IStateHandler validStateHandler) _StateHandlers.Add(validStateHandler);
 		}
+		SetProcess(false);
+		SetPhysicsProcess(false);
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -57,6 +58,12 @@ public class Actor : KinematicBody2D
 				break;
 			}
 		}
+	}
+
+	public void Enable()
+	{
+		SetProcess(true);
+		SetPhysicsProcess(true);
 	}
 }
 

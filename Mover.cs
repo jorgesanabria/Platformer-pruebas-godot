@@ -18,13 +18,16 @@ public class Mover : Node, IStateHandler
 		var (detectado, _) = _detector.DetectPlayer();
 		if (detectado)
 		{
+			GD.Print("Cambio estado");
 			return nameof(Perseguir);
 		}
 
-		if (_CurrentWayPoint != null && _CurrentWayPoint.DistanceTo(actor) <= 15)
+		if (_CurrentWayPoint != null && _CurrentWayPoint.DistanceTo(actor) <= 30)
 		{
 			_CurrentWayPoint = _CurrentWayPoint.NextWayPoint(_WayPoints);
 		}
+
+		GD.Print(actor.Position.DistanceTo(_CurrentWayPoint.Position));
 
 		actor.MoveTo(_CurrentWayPoint);
 
