@@ -36,6 +36,7 @@ public class Player : KinematicBody2D
 	protected InputHandler<InputActions, string> _input;
 	[Export]
 	public NodePath CollisionWeaponNode;
+	public float vida = 10000f;
 	public override void _Ready()
 	{
 		_input = new InputHandler<InputActions, string>(

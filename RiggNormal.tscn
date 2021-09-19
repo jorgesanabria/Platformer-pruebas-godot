@@ -1,0 +1,128 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://character/ante brazo derecho.png" type="Texture" id=1]
+[ext_resource path="res://character/ante pierna derecha.png" type="Texture" id=2]
+[ext_resource path="res://character/brazo derecho.png" type="Texture" id=3]
+[ext_resource path="res://character/cabeza.png" type="Texture" id=4]
+[ext_resource path="res://character/cuerpo.png" type="Texture" id=5]
+[ext_resource path="res://character/pierna izquierda.png" type="Texture" id=6]
+[ext_resource path="res://character/brazo izquierdo.png" type="Texture" id=7]
+[ext_resource path="res://character/ante pierna izquierda.png" type="Texture" id=8]
+[ext_resource path="res://character/pierna derecha.png" type="Texture" id=9]
+[ext_resource path="res://character/ante brazo izquierdo.png" type="Texture" id=10]
+
+[node name="RiggNormal" type="Node2D"]
+
+[node name="cuerpo" type="Sprite" parent="."]
+position = Vector2( -0.573181, 0.0237732 )
+texture = ExtResource( 5 )
+offset = Vector2( -26, -379 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="pierna_derecha" type="Sprite" parent="cuerpo"]
+position = Vector2( -58, 21 )
+z_index = 1
+texture = ExtResource( 9 )
+offset = Vector2( 143, -474 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="ante_pierna_derecha" type="Sprite" parent="cuerpo/pierna_derecha"]
+position = Vector2( -15, 138 )
+texture = ExtResource( 2 )
+offset = Vector2( 160, -621 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="cuerpo/pierna_derecha/ante_pierna_derecha"]
+position = Vector2( -5, 183 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="pierna_izquierda" type="Sprite" parent="cuerpo"]
+position = Vector2( 63, 13 )
+texture = ExtResource( 6 )
+offset = Vector2( -214, -448 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="ante_pierna_izquierda" type="Sprite" parent="cuerpo/pierna_izquierda"]
+position = Vector2( 7, 155 )
+texture = ExtResource( 8 )
+offset = Vector2( -218, -618 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="cuerpo/pierna_izquierda/ante_pierna_izquierda"]
+position = Vector2( 21, 162 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="brazo_derecho" type="Sprite" parent="cuerpo"]
+position = Vector2( -88, -302 )
+texture = ExtResource( 3 )
+offset = Vector2( 193, -130 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="ante_brazo_derecho" type="Sprite" parent="cuerpo/brazo_derecho"]
+position = Vector2( -26, 140 )
+texture = ExtResource( 1 )
+offset = Vector2( 221, -284 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="cuerpo/brazo_derecho/ante_brazo_derecho"]
+position = Vector2( -21, 159 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="brazo_izquierdo" type="Sprite" parent="cuerpo"]
+position = Vector2( 41, -305 )
+rotation = -1.03754
+z_index = -1
+texture = ExtResource( 7 )
+offset = Vector2( -237, -80 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="ante_brazo_izquierdo" type="Sprite" parent="cuerpo/brazo_izquierdo"]
+position = Vector2( 35, 156 )
+rotation = -1.50403
+texture = ExtResource( 10 )
+offset = Vector2( -275, -248 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Position2D" type="Position2D" parent="cuerpo/brazo_izquierdo/ante_brazo_izquierdo"]
+position = Vector2( 24, 129 )
+rotation = 2.52995
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="cabeza" type="Sprite" parent="cuerpo"]
+position = Vector2( -12, -384 )
+texture = ExtResource( 4 )
+offset = Vector2( -3, 62 )
+__meta__ = {
+"_edit_bone_": true
+}

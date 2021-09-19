@@ -1,0 +1,128 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://atlas.png" type="Texture" id=1]
+
+[node name="Player" type="Node2D"]
+
+[node name="cuerpo" type="Polygon2D" parent="."]
+position = Vector2( -161.22, -678.823 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 467.925, 833.962, 441.509, 869.811, 426.415, 933.962, 430.189, 1026.42, 428.302, 1111.32, 428.302, 1177.36, 447.17, 1226.42, 522.642, 1260.38, 616.981, 1241.51, 637.736, 1205.66, 641.509, 1152.83, 626.415, 1103.77, 609.434, 1037.74, 603.774, 988.679, 603.774, 937.736, 601.887, 894.34, 579.245, 860.377, 558.491, 822.642, 533.962, 805.66, 490.566, 807.547 )
+uv = PoolVector2Array( 467.925, 833.962, 441.509, 869.811, 426.415, 933.962, 430.189, 1026.42, 428.302, 1111.32, 428.302, 1177.36, 447.17, 1226.42, 522.642, 1260.38, 616.981, 1241.51, 637.736, 1205.66, 641.509, 1152.83, 626.415, 1103.77, 609.434, 1037.74, 603.774, 988.679, 603.774, 937.736, 601.887, 894.34, 579.245, 860.377, 558.491, 822.642, 533.962, 805.66, 490.566, 807.547 )
+bones = [ NodePath("cadera"), PoolRealArray( 0.5, 0.5, 0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0.5 ), NodePath("cadera/cadera_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda/ante_pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha/ante_pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo/ante_brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho/ante_brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/cuello"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="pierna_derecha" type="Polygon2D" parent="."]
+position = Vector2( -52.326, -749.534 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 308.571, 1302.86, 300, 1397.14, 302.857, 1534.29, 297.143, 1631.43, 311.429, 1665.71, 394.286, 1654.29, 400, 1605.71, 374.286, 1557.14, 385.714, 1497.14, 400, 1428.57, 414.286, 1368.57, 451.429, 1328.57, 448.571, 1280, 405.714, 1234.29, 345.714, 1220, 317.143, 1237.14 )
+uv = PoolVector2Array( 308.571, 1302.86, 300, 1397.14, 302.857, 1534.29, 297.143, 1631.43, 311.429, 1665.71, 394.286, 1654.29, 400, 1605.71, 374.286, 1557.14, 385.714, 1497.14, 400, 1428.57, 414.286, 1368.57, 451.429, 1328.57, 448.571, 1280, 405.714, 1234.29, 345.714, 1220, 317.143, 1237.14 )
+bones = [ NodePath("cadera"), PoolRealArray( 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ), NodePath("cadera/cadera_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda/ante_pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha"), PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), NodePath("cadera/cadera_derecha/pierna_derecha/ante_pierna_derecha"), PoolRealArray( 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo/ante_brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho/ante_brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/cuello"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="pierna_izquierda" type="Polygon2D" parent="."]
+position = Vector2( -285.671, -735.392 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 686.047, 1337.21, 690.698, 1402.33, 686.047, 1472.09, 683.721, 1541.86, 690.698, 1597.67, 700, 1648.84, 765.116, 1648.84, 786.047, 1637.21, 793.023, 1609.3, 779.07, 1583.72, 758.14, 1546.51, 767.442, 1502.33, 765.116, 1467.44, 767.442, 1413.95, 769.767, 1344.19, 776.744, 1306.98, 769.767, 1262.79, 758.14, 1220.93, 706.977, 1230.23, 676.744, 1248.84, 660.465, 1293.02 )
+uv = PoolVector2Array( 686.047, 1337.21, 690.698, 1402.33, 686.047, 1472.09, 683.721, 1541.86, 690.698, 1597.67, 700, 1648.84, 765.116, 1648.84, 786.047, 1637.21, 793.023, 1609.3, 779.07, 1583.72, 758.14, 1546.51, 767.442, 1502.33, 765.116, 1467.44, 767.442, 1413.95, 769.767, 1344.19, 776.744, 1306.98, 769.767, 1262.79, 758.14, 1220.93, 706.977, 1230.23, 676.744, 1248.84, 660.465, 1293.02 )
+bones = [ NodePath("cadera"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda/ante_pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha/ante_pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo/ante_brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho/ante_brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/cuello"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="bazo_derecho" type="Polygon2D" parent="."]
+position = Vector2( -28.284, -731.149 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 292.222, 1287.78, 307.778, 1255.56, 310, 1193.33, 316.667, 1154.44, 324.444, 1118.89, 334.444, 1071.11, 340, 1024.44, 336.667, 980, 340, 954.445, 313.333, 935.556, 291.111, 960, 283.333, 991.111, 274.444, 1018.89, 265.556, 1045.56, 257.778, 1086.67, 252.222, 1123.33, 250, 1160, 243.333, 1193.33, 244.444, 1231.11, 240, 1253.33, 243.333, 1277.78, 261.111, 1298.89, 282.222, 1301.11 )
+uv = PoolVector2Array( 292.222, 1287.78, 307.778, 1255.56, 310, 1193.33, 316.667, 1154.44, 324.444, 1118.89, 334.444, 1071.11, 340, 1024.44, 336.667, 980, 340, 954.445, 313.333, 935.556, 291.111, 960, 283.333, 991.111, 274.444, 1018.89, 265.556, 1045.56, 257.778, 1086.67, 252.222, 1123.33, 250, 1160, 243.333, 1193.33, 244.444, 1231.11, 240, 1253.33, 243.333, 1277.78, 261.111, 1298.89, 282.222, 1301.11 )
+bones = [ NodePath("cadera"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda/ante_pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha/ante_pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo/ante_brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho/ante_brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/cuello"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="brazo_izquierdo" type="Polygon2D" parent="."]
+position = Vector2( -339.411, -685.894 )
+z_index = -1
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 726.984, 1019.05, 745.614, 1092.98, 759.649, 1147.37, 770.175, 1196.49, 787.719, 1226.32, 807.018, 1236.84, 833.333, 1226.32, 833.333, 1189.47, 824.561, 1138.6, 817.544, 1098.25, 807.018, 1057.89, 800, 1007.02, 785.965, 971.93, 778.947, 931.579, 768.421, 892.982, 736.842, 873.684, 719.298, 901.754, 717.544, 947.368, 715.789, 985.965 )
+uv = PoolVector2Array( 726.984, 1019.05, 745.614, 1092.98, 759.649, 1147.37, 770.175, 1196.49, 787.719, 1226.32, 807.018, 1236.84, 833.333, 1226.32, 833.333, 1189.47, 824.561, 1138.6, 817.544, 1098.25, 807.018, 1057.89, 800, 1007.02, 785.965, 971.93, 778.947, 931.579, 768.421, 892.982, 736.842, 873.684, 719.298, 901.754, 717.544, 947.368, 715.789, 985.965 )
+bones = [ NodePath("cadera"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda/ante_pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha/ante_pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo/ante_brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho/ante_brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/cuello"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="cabeza" type="Polygon2D" parent="."]
+position = Vector2( -151.321, -625.083 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 343.86, 473.684, 349.123, 510.526, 331.579, 584.211, 312.281, 640.351, 298.246, 691.228, 328.07, 749.123, 391.228, 768.421, 461.404, 798.246, 522.807, 808.772, 573.684, 805.263, 624.561, 773.684, 663.158, 742.105, 678.947, 712.281, 689.474, 668.421, 671.93, 636.842, 664.912, 575.439, 643.86, 517.544, 601.754, 471.93, 549.123, 443.86, 478.947, 438.596, 435.088, 401.754, 387.719, 396.491, 349.123, 410.526, 326.316, 445.614 )
+uv = PoolVector2Array( 343.86, 473.684, 349.123, 510.526, 331.579, 584.211, 312.281, 640.351, 298.246, 691.228, 328.07, 749.123, 391.228, 768.421, 461.404, 798.246, 522.807, 808.772, 573.684, 805.263, 624.561, 773.684, 663.158, 742.105, 678.947, 712.281, 689.474, 668.421, 671.93, 636.842, 664.912, 575.439, 643.86, 517.544, 601.754, 471.93, 549.123, 443.86, 478.947, 438.596, 435.088, 401.754, 387.719, 396.491, 349.123, 410.526, 326.316, 445.614 )
+bones = [ NodePath("cadera"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_izquierda/pierna_izquierda/ante_pierna_izquierda"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/cadera_derecha/pierna_derecha/ante_pierna_derecha"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_izquierdo/brazo_izquierdo/ante_brazo_izquierdo"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/hombro_derecho/brazo_derecho/ante_brazo_derecho"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("cadera/columna/cuello"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="cadera" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( 389.494, 517.455 )
+rest = Transform2D( 1, 0, 0, 1, 389.494, 517.455 )
+
+[node name="cadera_izquierda" type="Bone2D" parent="Skeleton2D/cadera"]
+position = Vector2( 50.5108, 29.184 )
+rest = Transform2D( 1, 0, 0, 1, 50.5108, 29.184 )
+
+[node name="pierna_izquierda" type="Bone2D" parent="Skeleton2D/cadera/cadera_izquierda"]
+position = Vector2( 7.85724, 160.512 )
+rest = Transform2D( 1, 0, 0, 1, 7.85724, 160.512 )
+
+[node name="ante_pierna_izquierda" type="Bone2D" parent="Skeleton2D/cadera/cadera_izquierda/pierna_izquierda"]
+position = Vector2( 4.06506, 156.052 )
+rest = Transform2D( 1, 0, 0, 1, 4.06506, 156.052 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="cadera_derecha" type="Bone2D" parent="Skeleton2D/cadera"]
+position = Vector2( -77.4499, 33.6738 )
+rest = Transform2D( 1, 0, 0, 1, -77.4499, 33.6738 )
+
+[node name="pierna_derecha" type="Bone2D" parent="Skeleton2D/cadera/cadera_derecha"]
+position = Vector2( -23.0702, 168.511 )
+rest = Transform2D( 1, 0, 0, 1, -19.5066, 159.602 )
+
+[node name="ante_pierna_derecha" type="Bone2D" parent="Skeleton2D/cadera/cadera_derecha/pierna_derecha"]
+position = Vector2( -7.66704, 184.792 )
+rest = Transform2D( 1, 0, 0, 1, -5.88524, 166.974 )
+
+[node name="columna" type="Bone2D" parent="Skeleton2D/cadera"]
+position = Vector2( -26.9391, -322.147 )
+rest = Transform2D( 1, 0, 0, 1, -26.9391, -322.147 )
+
+[node name="hombro_izquierdo" type="Bone2D" parent="Skeleton2D/cadera/columna"]
+position = Vector2( 50.5108, 30.3065 )
+rest = Transform2D( 1, 0, 0, 1, 50.5108, 30.3065 )
+
+[node name="brazo_izquierdo" type="Bone2D" parent="Skeleton2D/cadera/columna/hombro_izquierdo"]
+position = Vector2( 31.4289, 149.287 )
+rest = Transform2D( 1, 0, 0, 1, 31.4289, 149.287 )
+
+[node name="ante_brazo_izquierdo" type="Bone2D" parent="Skeleton2D/cadera/columna/hombro_izquierdo/brazo_izquierdo"]
+position = Vector2( 23.5717, 130.206 )
+rest = Transform2D( 1, 0, 0, 1, 23.5717, 130.206 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="hombro_derecho" type="Bone2D" parent="Skeleton2D/cadera/columna"]
+position = Vector2( -74.0825, 37.0412 )
+rest = Transform2D( 1, 0, 0, 1, -74.0825, 37.0412 )
+
+[node name="brazo_derecho" type="Bone2D" parent="Skeleton2D/cadera/columna/hombro_derecho"]
+position = Vector2( -31.4957, 153.978 )
+rest = Transform2D( 1, 0, 0, 1, -31.4957, 153.978 )
+
+[node name="ante_brazo_derecho" type="Bone2D" parent="Skeleton2D/cadera/columna/hombro_derecho/brazo_derecho"]
+position = Vector2( -17.7986, 120.661 )
+rest = Transform2D( 1, 0, 0, 1, -17.7986, 120.661 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="cuello" type="Bone2D" parent="Skeleton2D/cadera/columna"]
+position = Vector2( 8.19091, -78.3721 )
+rest = Transform2D( 1, 0, 0, 1, 8.19091, -78.3721 )
+__meta__ = {
+"_edit_ik_": true
+}
