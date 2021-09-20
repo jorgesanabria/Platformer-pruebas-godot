@@ -27,7 +27,6 @@ public class CajaDeObjeto : Area2D
 						{
 							_child.GetParent().RemoveChild(_child);
 							inventario.AddChild(_child);
-							//_child.Transform = inventario.Transform;
 							_child.Position = inventario.Position;
 						}
 					}

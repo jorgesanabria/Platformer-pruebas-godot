@@ -18,6 +18,7 @@
     <Compile Include="Actor.cs" />
     <Compile Include="BT\Node.cs" />
     <Compile Include="CajaDeObjeto.cs" />
+    <Compile Include="CharacterController.cs" />
     <Compile Include="Covertura.cs" />
     <Compile Include="DetectorRadial.cs" />
     <Compile Include="EnemigoDePrueba.cs" />
@@ -31,6 +32,7 @@
     <Compile Include="Levels\Left.cs" />
     <Compile Include="Levels\Right.cs" />
     <Compile Include="Malo.cs" />
+    <Compile Include="MoveHorizontal.cs" />
     <Compile Include="Mover.cs" />
     <Compile Include="Perseguir.cs" />
     <Compile Include="Player.cs" />
