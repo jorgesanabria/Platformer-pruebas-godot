@@ -16,7 +16,7 @@ public class CharacterController : KinematicBody2D
 	[Export]
 	public string CurrentState { get; set; }
 	private List<IMovementStateHandler> _StateHandlers { get; set; } = new List<IMovementStateHandler>();
-	private Vector2 Velocity { get; set; }
+	public Vector2 Velocity { get; set; }
 	private bool _ScaleHorizontal;
 	public override void _Ready()
 	{
@@ -41,6 +41,7 @@ public class CharacterController : KinematicBody2D
 				CurrentState = nextState;
 				break;
 			}
+			
 		}
 
 		Velocity = MoveAndSlide(Velocity, FloorNormal);

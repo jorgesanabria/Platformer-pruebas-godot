@@ -1,23 +1,50 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://CharacterController.cs" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Kemono.tscn" type="PackedScene" id=2]
 [ext_resource path="res://MoveHorizontal.cs" type="Script" id=3]
+[ext_resource path="res://Junp.cs" type="Script" id=4]
+[ext_resource path="res://SaltoDePared.cs" type="Script" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 29.0
+radius = 56.0
+height = 94.0
 
 [node name="CharacterController" type="KinematicBody2D"]
 script = ExtResource( 1 )
 MovementStates = NodePath("MovementStateHandlers")
+GravityVector = Vector2( 0, 500 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
 
 [node name="MovementStateHandlers" type="Node" parent="."]
 
 [node name="MoveHorizontal" type="Node" parent="MovementStateHandlers"]
 script = ExtResource( 3 )
+SaltarDesdePared = NodePath("../../Sensores/SensorPared")
+pathToAnimation = NodePath("../../Kemono")
+
+[node name="Junp" type="Node" parent="MovementStateHandlers"]
+script = ExtResource( 4 )
+JunpFoce = 1500.0
+Animation = NodePath("../../Kemono")
+SaltarDesdePared = NodePath("../../Sensores/SensorPared")
+
+[node name="SaltoDePared" type="Node" parent="MovementStateHandlers"]
+script = ExtResource( 5 )
+SensorPared = NodePath("../../Sensores/SensorPared")
+HorizontalForce = 300.0
+VerticalForce = 2500.0
+
+[node name="Kemono" parent="." instance=ExtResource( 2 )]
+position = Vector2( -56, 1.64645 )
+scale = Vector2( 0.351257, 0.351257 )
+
+[node name="Sensores" type="Node2D" parent="."]
+
+[node name="SensorPared" type="RayCast2D" parent="Sensores"]
+position = Vector2( 49.265, 0.529724 )
+enabled = true
+cast_to = Vector2( 20, 0 )
+collision_mask = 2

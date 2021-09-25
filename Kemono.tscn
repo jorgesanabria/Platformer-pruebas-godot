@@ -1,0 +1,46 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://images/kemono/skeleton-correr_03.png" type="Texture" id=1]
+[ext_resource path="res://images/kemono/skeleton-correr_01.png" type="Texture" id=2]
+[ext_resource path="res://images/kemono/skeleton-correr_02.png" type="Texture" id=3]
+[ext_resource path="res://images/kemono/skeleton-correr_04.png" type="Texture" id=4]
+[ext_resource path="res://images/kemono/skeleton-correr_06.png" type="Texture" id=5]
+[ext_resource path="res://images/kemono/skeleton-correr_07.png" type="Texture" id=6]
+[ext_resource path="res://images/kemono/skeleton-correr_00.png" type="Texture" id=7]
+[ext_resource path="res://images/kemono/skeleton-correr_08.png" type="Texture" id=8]
+[ext_resource path="res://images/kemono/skeleton-correr_09.png" type="Texture" id=9]
+[ext_resource path="res://images/kemono/skeleton-correr_10.png" type="Texture" id=10]
+[ext_resource path="res://images/kemono/skeleton-correr_11.png" type="Texture" id=11]
+[ext_resource path="res://images/kemono/skeleton-correr_13.png" type="Texture" id=12]
+[ext_resource path="res://images/kemono/skeleton-correr_12.png" type="Texture" id=13]
+[ext_resource path="res://images/kemono/skeleton-correr_05.png" type="Texture" id=14]
+[ext_resource path="res://images/kemono/ramiro.png" type="Texture" id=15]
+[ext_resource path="res://Kemono.cs" type="Script" id=16]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "saltando",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "Quiero",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 14 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "correr",
+"speed": 20.0
+} ]
+
+[node name="Kemono" type="AnimatedSprite"]
+frames = SubResource( 1 )
+animation = "Quiero"
+playing = true
+script = ExtResource( 16 )
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true

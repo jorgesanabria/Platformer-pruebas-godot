@@ -63,3 +63,5 @@ text = "Vida 100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="Player"]
