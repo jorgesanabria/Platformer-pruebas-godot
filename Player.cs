@@ -37,6 +37,7 @@ public class Player : KinematicBody2D
 	[Export]
 	public NodePath CollisionWeaponNode;
 	public float vida = 10000f;
+	private bool _ScaleHorizontal;
 	public override void _Ready()
 	{
 		_input = new InputHandler<InputActions, string>(
@@ -190,17 +191,18 @@ public class Player : KinematicBody2D
 		{
 			if (_input.IsActionPressed(InputActions.Dash) && !_dashed || _dashTime > 0)
 			{
-				_dashed = true;	
+				_dashed = true;
 				var dash = new Vector2(GlobalVelocity.x * DashFactor, GlobalVelocity.y);
 				if (_dashTime == 0) _dashTime = 0.25f;
 				GlobalVelocity = dash;
 			}
-			if (!_input.IsActionPressed(InputActions.Dash)) {
+			if (!_input.IsActionPressed(InputActions.Dash))
+			{
 				_dashed = false;
 			}
 			return current;
 		});
-		_fsm.Add(PlayerState.OnGround, (current, player) => !IsOnFloor() && !IsOnWall()? PlayerState.OnAir : current);
+		_fsm.Add(PlayerState.OnGround, (current, player) => !IsOnFloor() && !IsOnWall() ? PlayerState.OnAir : current);
 	}
 
 	private Vector2 _getCollisionNormal()
@@ -221,31 +223,20 @@ public class Player : KinematicBody2D
 		_wallTime = Mathf.Clamp(_wallTime - delta, 0, 10);
 		_dashTime = Mathf.Clamp(_dashTime - delta, 0, 10);
 
-		/*if (_input.IsActionPressed(InputActions.MoveLeft))
+		if (Input.IsActionPressed("ui_right") && _ScaleHorizontal)
 		{
-			var pos = GetNode<Area2D>("Arma")?.Position;
-			if (pos.x > 0)
-				GetNode<Area2D>("Arma").Position = new Vector2(-pos.x, pos.y);
-		}
-		if (_input.IsActionPressed(InputActions.MoveRight))
-		{
-			var pos = GetNode<Area2D>("Arma")?.Position;
-			if (pos.x < 0)
-				GetNode<Area2D>("Arma").Position = new Vector2(-pos.x, pos.y);
+			var transform = GetNode<Node2D>("Slot").Transform;
+			transform.x *= -1;
+			GetNode<Node2D>("Slot").Transform = transform;
+			_ScaleHorizontal = false;
 		}
 
-		if (Input.IsActionPressed("attack") && !_atacando)
+		if (Input.IsActionPressed("ui_left") && !_ScaleHorizontal)
 		{
-			_atacando = true;
-			var result = GetNode<Area2D>("Arma")?.GetOverlappingBodies() ?? new Godot.Collections.Array();
-
-			foreach (var body in result)
-			{
-				var enemy = body as Malo;
-				enemy?.Damage();
-			}
+			var transform = GetNode<Node2D>("Slot").Transform;
+			transform.x *= -1;
+			GetNode<Node2D>("Slot").Transform = transform;
+			_ScaleHorizontal = true;
 		}
-
-		if (!Input.IsActionPressed("attack")) _atacando = false;*/
 	}
 }

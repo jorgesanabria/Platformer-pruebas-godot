@@ -12,36 +12,42 @@ public class SaltoDePared : Node, IMovementStateHandler
 	[Export]
 	public float VerticalForce { get; set; } = 500f;
 	private bool _isJumping = false;
+	private bool _isOnWall;
 
 	[Export]
 	public float WallTime { get; set; } = 0.5f;
+	private Vector2 _originalGravity = Vector2.Zero;
 	public string Handle(CharacterController controller)
 	{
-		if (GetNode<RayCast2D>(SensorPared).IsColliding() && Input.IsActionPressed("ui_up"))
+		if (GetNode<RayCast2D>(SensorPared).IsColliding() && Input.IsActionPressed("ui_left") && !controller.IsOnFloor())
 		{
-			controller.Velocity = new Vector2(HorizontalForce, -VerticalForce);
-			_isJumping = true;
+			_originalGravity = controller.GravityVector;
+			controller.GravityVector /= 3;
+			//controller.Velocity = new Vector2(HorizontalForce, -VerticalForce);
+			//controller.Velocity = new Vector2(controller.Velocity.x, controller.Velocity.y / 3);
+			_isOnWall = true;
 		}
 
 		if (controller.IsOnFloor())
 		{
-			_isJumping = false;
+			_isOnWall = false;
+			controller.GravityVector = _originalGravity;
 			return nameof(MoveHorizontal);
 		}
 
-		if (_tiempoAcumulado > 0)
-		{
-			if (Input.IsActionPressed("ui_left") && !Input.IsActionPressed("ui_right"))
-			{
-				controller.MoveHorizontal(HorizontalDirection.Right, HorizontalForce);
-				return HandlerName;
-			}
-			if (Input.IsActionPressed("ui_right") && !Input.IsActionPressed("ui_left"))
-			{
-				controller.MoveHorizontal(HorizontalDirection.Left, HorizontalForce);
-				return HandlerName;
-			}
-		}
+		//if (_tiempoAcumulado > 0)
+		//{
+		//	if (Input.IsActionPressed("ui_left") && !Input.IsActionPressed("ui_right"))
+		//	{
+		//		controller.MoveHorizontal(HorizontalDirection.Right, HorizontalForce);
+		//		return HandlerName;
+		//	}
+		//	if (Input.IsActionPressed("ui_right") && !Input.IsActionPressed("ui_left"))
+		//	{
+		//		controller.MoveHorizontal(HorizontalDirection.Left, HorizontalForce);
+		//		return HandlerName;
+		//	}
+		//}
 
 		if (GetNode<RayCast2D>(SensorPared).IsColliding())
 		{

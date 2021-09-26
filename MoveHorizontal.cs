@@ -47,7 +47,7 @@ public class MoveHorizontal : Node, IMovementStateHandler
 			return nameof(Junp);
 		}
 
-		if (GetNode<RayCast2D>(SaltarDesdePared).IsColliding())
+		if (GetNode<RayCast2D>(SaltarDesdePared).IsColliding() && !controller.IsOnFloor())
 		{
 			GD.Print("saltar desde pared");
 			return nameof(SaltoDePared);
