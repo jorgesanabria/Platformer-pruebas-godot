@@ -468,7 +468,7 @@ public class Malo : KinematicBody2D, IDamagable
 		}
 
 	}
-	int _life = 100;
+	int _life = 10000;
 	public void Damage()
 	{
 		GD.Print("estoy lastimado");

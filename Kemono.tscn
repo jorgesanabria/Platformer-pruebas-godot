@@ -19,25 +19,24 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "saltando",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 15 ) ],
 "loop": true,
-"name": "Quiero",
+"name": "Quieto",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 14 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 12 ) ],
 "loop": true,
-"name": "correr",
+"name": "Correr",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Saltar",
+"speed": 5.0
 } ]
 
 [node name="Kemono" type="AnimatedSprite"]
 frames = SubResource( 1 )
-animation = "Quiero"
 playing = true
 script = ExtResource( 16 )
 

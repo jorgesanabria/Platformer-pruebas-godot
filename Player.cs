@@ -38,8 +38,12 @@ public class Player : KinematicBody2D
 	public NodePath CollisionWeaponNode;
 	public float vida = 10000f;
 	private bool _ScaleHorizontal;
+
+	private Vector2 _beforePosition = Vector2.Zero;
 	public override void _Ready()
 	{
+		_beforePosition = Position;
+		GetNode<Kemono>("Slot/Kemono").Rotation = 0;
 		_input = new InputHandler<InputActions, string>(
 			map: new Dictionary<InputActions, string>
 			{
@@ -69,6 +73,7 @@ public class Player : KinematicBody2D
 			{
 				var jump = new Vector2(GlobalVelocity.x, -JumpForce);
 				GlobalVelocity = jump;
+				GetNode<Kemono>("Slot/Kemono").Saltar();
 				return PlayerState.OnAir;
 			}
 			return current;
@@ -79,13 +84,24 @@ public class Player : KinematicBody2D
 				return current;
 
 			var horizontal = Vector2.Zero;
+			var correr = false;
 			if (_input.IsActionPressed(InputActions.MoveLeft))
 			{
 				horizontal = new Vector2((-1 * HorizontalSpeed), GlobalVelocity.y);
+				correr = true;
 			}
 			if (_input.IsActionPressed(InputActions.MoveRight))
 			{
 				horizontal = new Vector2((HorizontalSpeed), GlobalVelocity.y);
+				correr = true;
+			}
+			if (correr)
+			{
+				GetNode<Kemono>("Slot/Kemono").Correr();
+			}
+			else
+			{
+				GetNode<Kemono>("Slot/Kemono").Quieto();
 			}
 			GlobalVelocity = horizontal;
 			return current;
@@ -223,7 +239,7 @@ public class Player : KinematicBody2D
 		_wallTime = Mathf.Clamp(_wallTime - delta, 0, 10);
 		_dashTime = Mathf.Clamp(_dashTime - delta, 0, 10);
 
-		if (Input.IsActionPressed("ui_right") && _ScaleHorizontal)
+		if ((_beforePosition - Position).Normalized().x < 0 && _ScaleHorizontal)
 		{
 			var transform = GetNode<Node2D>("Slot").Transform;
 			transform.x *= -1;
@@ -231,12 +247,21 @@ public class Player : KinematicBody2D
 			_ScaleHorizontal = false;
 		}
 
-		if (Input.IsActionPressed("ui_left") && !_ScaleHorizontal)
+		if ((_beforePosition - Position).Normalized().x > 0 && !_ScaleHorizontal)
 		{
 			var transform = GetNode<Node2D>("Slot").Transform;
 			transform.x *= -1;
 			GetNode<Node2D>("Slot").Transform = transform;
 			_ScaleHorizontal = true;
 		}
+
+		_beforePosition = Position;
+
+		if (Input.IsActionPressed("ataque"))
+		{
+			GetNode<Kemono>("Slot/Kemono").Rotate(100 * delta);
+			GetNode<ArmaCircular>("Slot/Arma").Atacar();
+		}
+		else GetNode<Kemono>("Slot/Kemono").Rotation = 0;
 	}
 }
