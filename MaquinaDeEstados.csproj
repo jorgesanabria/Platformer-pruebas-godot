@@ -16,6 +16,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actor.cs" />
+    <Compile Include="Boton.cs" />
+    <Compile Include="Botones.cs" />
     <Compile Include="BT\Node.cs" />
     <Compile Include="CajaDeObjeto.cs" />
     <Compile Include="CharacterController.cs" />
@@ -33,10 +35,12 @@
     <Compile Include="Kemono.cs" />
     <Compile Include="Levels\ArmaCircular.cs" />
     <Compile Include="Levels\Left.cs" />
+    <Compile Include="Levels\Pila.cs" />
     <Compile Include="Levels\Right.cs" />
     <Compile Include="Malo.cs" />
     <Compile Include="MoveHorizontal.cs" />
     <Compile Include="Mover.cs" />
+    <Compile Include="ObjectDetector.cs" />
     <Compile Include="Perseguir.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerState.cs" />

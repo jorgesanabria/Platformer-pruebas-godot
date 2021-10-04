@@ -257,11 +257,14 @@ public class Player : KinematicBody2D
 
 		_beforePosition = Position;
 
-		if (Input.IsActionPressed("ataque"))
+		if (Input.IsActionJustPressed("ataque"))
 		{
-			GetNode<Kemono>("Slot/Kemono").Rotate(100 * delta);
-			GetNode<ArmaCircular>("Slot/Arma").Atacar();
+			//GetNode<Kemono>("Slot/Kemono").Rotate(100 * delta);
+			//GetNode<ArmaCircular>("Slot/Arma").Atacar();
+			//GlobalPosition = GetNode<Position2D>("Slot/Portal").GlobalPosition;
+
+			//GetNode<Tween>("Tween").InterpolateProperty(GetNode<Sprite>("Circulo"), "scale", GetNode<Sprite>("Circulo").Scale, GetNode<Sprite>("Circulo").Scale * 5000, 5f);//no funca
 		}
-		else GetNode<Kemono>("Slot/Kemono").Rotation = 0;
+		//else GetNode<Kemono>("Slot/Kemono").Rotation = 0;
 	}
 }
