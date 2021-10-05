@@ -16,29 +16,27 @@ public class Boton : Sprite
 
 	private static bool KeyReleased = true;
 
-	private Player _player;
-
 	public override void _Process(float delta)
 	{
 		if (SoyActual && KeyReleased)
 		{
 			GetNode<Label>("Label").Text = "Actual";
-			if (Input.IsActionJustPressed("Izquierda") && Izquierda != null)
+			if (Input.IsActionJustPressed("ui_left") && Izquierda != null)
 			{
 				KeyReleased = false;
 				MarcarNodo(Izquierda);
 			}
-			else if (Input.IsActionJustPressed("Derecha") && Derecha != null)
+			else if (Input.IsActionJustPressed("ui_right") && Derecha != null)
 			{
 				KeyReleased = false;
 				MarcarNodo(Derecha);
 			}
-			else if (Input.IsActionJustPressed("Arriba") && Arriba != null)
+			else if (Input.IsActionJustPressed("ui_up") && Arriba != null)
 			{
 				KeyReleased = false;
 				MarcarNodo(Arriba);
 			}
-			else if (Input.IsActionJustPressed("Abajo") && Abajo != null)
+			else if (Input.IsActionJustPressed("ui_down") && Abajo != null)
 			{
 				KeyReleased = false;
 				MarcarNodo(Abajo);
@@ -48,7 +46,7 @@ public class Boton : Sprite
 		{
 			GetNode<Label>("Label").Text = string.Empty;
 		}
-		if (!Input.IsActionPressed("Izquierda") && !Input.IsActionPressed("Derecha") && !Input.IsActionPressed("Arriba") && !Input.IsActionPressed("Abajo"))
+		if (!Input.IsActionPressed("ui_left") && !Input.IsActionPressed("ui_right") && !Input.IsActionPressed("ui_up") && !Input.IsActionPressed("ui_down"))
 		{
 			KeyReleased = true;
 		}

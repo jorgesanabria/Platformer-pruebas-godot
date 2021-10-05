@@ -47,9 +47,9 @@ public class Player : KinematicBody2D
 		_input = new InputHandler<InputActions, string>(
 			map: new Dictionary<InputActions, string>
 			{
-				{ InputActions.MoveLeft, "ui_left" },
-				{ InputActions.MoveRight, "ui_right" },
-				{ InputActions.Jump, "ui_up" },
+				{ InputActions.MoveLeft, "Izquierda" },
+				{ InputActions.MoveRight, "Derecha" },
+				{ InputActions.Jump, "Arriba" },
 				{ InputActions.Attack, "ui_accept" },
 				{ InputActions.Dash, "dash" }
 			},
