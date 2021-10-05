@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Boton.cs" type="Script" id=2]
+
+[node name="Boton" type="Sprite"]
+position = Vector2( 198.64, 109.505 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+Derecha = NodePath("")
+Abajo = NodePath("")
+
+[node name="Label" type="Label" parent="."]
+margin_left = -18.4997
+margin_top = 48.772
+margin_right = 21.5003
+margin_bottom = 62.772
+__meta__ = {
+"_edit_use_anchors_": false
+}

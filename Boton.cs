@@ -16,6 +16,8 @@ public class Boton : Sprite
 
 	private static bool KeyReleased = true;
 
+	private Player _player;
+
 	public override void _Process(float delta)
 	{
 		if (SoyActual && KeyReleased)
@@ -54,7 +56,9 @@ public class Boton : Sprite
 
 	private void MarcarNodo(NodePath path)
 	{
+		if (path == null) return;
 		var node = GetNode<Boton>(path);
+		if (node == null) return;
 		SoyActual = false;
 		node.SoyActual = true;
 	}
