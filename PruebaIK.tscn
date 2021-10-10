@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://character/odcvMly.png" type="Texture" id=1]
+[ext_resource path="res://OneJointIK.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PruebaIK.cs" type="Script" id=4]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 5.61255, 4.4899 )
+script = ExtResource( 4 )
+
+[node name="OneJointIK" parent="." instance=ExtResource( 3 )]
+UpperBoneNode = NodePath("../upper")
+LowerBoneNode = NodePath("../upper/lower")
+TerminusNode = NodePath("../upper/lower/terminus")
+JointExtendLimit = 20.0
+JointFoldLimit = 160.0
+PinTerminusRotation = true
+
+[node name="upper" type="Position2D" parent="."]
+position = Vector2( 456.842, 169.492 )
+
+[node name="Sprite" type="Sprite" parent="upper"]
+position = Vector2( 0, 69.5927 )
+texture = ExtResource( 1 )
+
+[node name="lower" type="Position2D" parent="upper"]
+position = Vector2( -6.73479, 136.94 )
+
+[node name="Sprite" type="Sprite" parent="upper/lower"]
+position = Vector2( 4.48984, 68.4702 )
+texture = ExtResource( 1 )
+
+[node name="terminus" type="Position2D" parent="upper/lower"]
+position = Vector2( -3.36737, 143.675 )
