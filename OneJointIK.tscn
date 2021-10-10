@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://OneJointIK.cs" type="Script" id=1]
+
+[node name="OneJointIK" type="Node"]
+script = ExtResource( 1 )

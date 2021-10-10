@@ -41,6 +41,7 @@
     <Compile Include="MoveHorizontal.cs" />
     <Compile Include="Mover.cs" />
     <Compile Include="ObjectDetector.cs" />
+    <Compile Include="OneJointIK.cs" />
     <Compile Include="Perseguir.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerState.cs" />
