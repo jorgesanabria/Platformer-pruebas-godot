@@ -15,9 +15,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="A.cs" />
     <Compile Include="Actor.cs" />
     <Compile Include="Boton.cs" />
     <Compile Include="Botones.cs" />
+    <Compile Include="Brazo.cs" />
     <Compile Include="BT\Node.cs" />
     <Compile Include="CajaDeObjeto.cs" />
     <Compile Include="CharacterController.cs" />
@@ -44,11 +46,14 @@
     <Compile Include="ObjectDetector.cs" />
     <Compile Include="OneJointIK.cs" />
     <Compile Include="Perseguir.cs" />
+    <Compile Include="Pierna.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PruebaIK.cs" />
+    <Compile Include="PruebaIkPata.cs" />
     <Compile Include="SaltoDePared.cs" />
+    <Compile Include="SeguirPathPrueba.cs" />
     <Compile Include="Soplete.cs" />
     <Compile Include="Trigger.cs" />
     <Compile Include="WayPoint.cs" />

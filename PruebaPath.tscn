@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://SeguirPathPrueba.cs" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( -0.707107, -0.353553, 0.707107, 0.353553, 128.144, 275.275, -55.3959, 18.0203, 55.3959, -18.0203, 367.23, 140.915, -75.2173, -79.3796, 75.2173, 79.3796, 606.232, 149.401, 0, 0, 0, 0, 672.7, 276.68, 0, 0, 0, 0, 128.227, 275.266, 0, 0, 0, 0, 128.144, 275.275 )
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 260.142, 234.306 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Path2D" type="Path2D" parent="Sprite"]
+position = Vector2( -137.439, -265.454 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Sprite/Path2D"]
+position = Vector2( 128.144, 275.275 )
+rotation = -0.531044

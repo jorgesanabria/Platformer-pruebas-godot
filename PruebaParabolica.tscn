@@ -9,6 +9,7 @@
 position = Vector2( 196.431, 310.922 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+position2 = NodePath("../Sprite2")
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 448.985, 141.43 )

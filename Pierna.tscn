@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://OneJointIK.tscn" type="PackedScene" id=1]
+[ext_resource path="res://character/kipzune/ramiro/ramiro_ante_pierna_derecha.png" type="Texture" id=2]
+[ext_resource path="res://character/kipzune/ramiro/ramiro_pierna_derecha.png" type="Texture" id=3]
+[ext_resource path="res://Pierna.cs" type="Script" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 1.85406, 28.0758, -1.85406, -28.0758, -97.7144, 164.921, -72.5732, -1.32433, 72.5732, 1.32433, -1.43173, 107.74, 1.85406, -28.0758, -1.85406, 28.0758, 78.8739, 163.239, -4.23785, 34.9623, 4.23785, -34.9623, -97.6838, 164.868 )
+}
+
+[node name="Pierna" type="Position2D"]
+script = ExtResource( 4 )
+
+[node name="Upper" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Upper"]
+position = Vector2( -0.667412, 42.0474 )
+rotation = -0.120261
+texture = ExtResource( 3 )
+
+[node name="Lower" type="Position2D" parent="Upper"]
+position = Vector2( 0, 82.7601 )
+
+[node name="Sprite" type="Sprite" parent="Upper/Lower"]
+position = Vector2( -2.32918, 33.3947 )
+rotation = -0.105399
+texture = ExtResource( 2 )
+
+[node name="Terminus" type="Position2D" parent="Upper/Lower"]
+position = Vector2( -3.0034, 76.4196 )
+
+[node name="OneJointIK" parent="." instance=ExtResource( 1 )]
+UpperBoneNode = NodePath("../Upper")
+LowerBoneNode = NodePath("../Upper/Lower")
+TerminusNode = NodePath("../Upper/Lower/Terminus")
+JointFoldLimit = 150.0
+MaxDistance = 150.0
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( -4.18752, 43.7943 )
+scale = Vector2( 0.616269, 0.717396 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( -97.7144, 164.921 )
+rotation = -1.58799

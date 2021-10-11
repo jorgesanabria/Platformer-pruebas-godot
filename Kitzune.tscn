@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Pierna.tscn" type="PackedScene" id=1]
+[ext_resource path="res://character/kipzune/ramiro/ramiro_cuerpo.png" type="Texture" id=2]
+[ext_resource path="res://Brazo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://character/kipzune/ramiro/ramiro_cabeza.png" type="Texture" id=7]
+
+[node name="Kitzune" type="Node2D"]
+position = Vector2( 456, 316 )
+
+[node name="ramiro_cuerpo" type="Sprite" parent="."]
+position = Vector2( 8.01602, 85.2028 )
+texture = ExtResource( 2 )
+
+[node name="ramiro_cabeza" type="Sprite" parent="ramiro_cuerpo"]
+position = Vector2( -20.2165, -200.381 )
+texture = ExtResource( 7 )
+
+[node name="Pierna" parent="ramiro_cuerpo" instance=ExtResource( 1 )]
+position = Vector2( -34, 46 )
+z_index = -1
+
+[node name="Pierna2" parent="ramiro_cuerpo" instance=ExtResource( 1 )]
+position = Vector2( 32, 49 )
+z_index = -2
+Offset = 280.0
+
+[node name="Brazo" parent="ramiro_cuerpo" instance=ExtResource( 3 )]
+position = Vector2( -37.4577, -64.4272 )
+Offset = 130.0
+Speed = 300.0
+
+[node name="Brazo2" parent="ramiro_cuerpo" instance=ExtResource( 3 )]
+position = Vector2( 23.9729, -63.6781 )
+z_index = -3
+Speed = 300.0
